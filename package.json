@@ -4,17 +4,20 @@
   "version": "0.3.0",
   "author": "Valeri Karpov <val@karpov.io>",
   "dependencies": {
-    "bson": "3.x",
     "co": "4.6.0",
     "debug": "4.1.0",
     "lodash.get": "4.4.2",
     "ramda": "0.25.0"
+  },
+  "peerDependencies": {
+    "bson": "*"
   },
   "devDependencies": {
     "acquit": "1.0.2",
     "acquit-ignore": "0.1.0",
     "acquit-markdown": "0.1.0",
     "archetype": "0.8.2",
+    "bson": "*",
     "dox": "0.9.0",
     "express": "4.16.2",
     "mocha": "4.1.0",
