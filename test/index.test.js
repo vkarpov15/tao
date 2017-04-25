@@ -133,6 +133,18 @@ describe('tao', function() {
     });
   });
 
+  it('destructuring first obj', function() {
+    return co(function*() {
+      const lib = tao({
+        stub: ({ lib }) => () => {
+          return lib;
+        }
+      })({});
+
+      assert.strictEqual(lib.stub(), lib);
+    });
+  });
+
   it('clone', function() {
     return co(function*() {
       const lib = tao({
