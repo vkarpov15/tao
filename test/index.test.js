@@ -6,8 +6,8 @@ describe('tao', function() {
   it('applies middleware to functions', function() {
     return co(function*() {
       const lib = tao({
-        stub: param => Promise.resolve(param),
-        plusOne: param => Promise.resolve(param + 1)
+        stub: () => param => Promise.resolve(param),
+        plusOne: () => param => Promise.resolve(param + 1)
       })();
 
       assert.equal(yield lib.stub(42), 42);
@@ -30,14 +30,25 @@ describe('tao', function() {
     });
   });
 
+  it('calling other functions', function() {
+    return co(function*() {
+      const lib = tao({
+        plusOne: () => param => Promise.resolve(param + 1),
+        plusTwo: lib => param => lib.plusOne(param).then(res => lib.plusOne(res))
+      })();
+
+      assert.equal(yield lib.plusTwo(40), 42);
+    });
+  });
+
   it('nested objects', function() {
     return co(function*() {
       const lib = tao({
         math: {
-          plusOne: param => Promise.resolve(param + 1)
+          plusOne: () => param => Promise.resolve(param + 1)
         },
         test: {
-          stub: param => Promise.resolve(param)
+          stub: () => param => Promise.resolve(param)
         }
       })();
 

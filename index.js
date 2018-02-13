@@ -7,7 +7,8 @@ const get = require('lodash.get');
 
 module.exports = _lib => function applyParamsAndMiddleware() {
   const _applySpec = applySpec(_lib);
-  const lib = arguments.length ? _applySpec.apply(_applySpec, arguments) : _lib;
+  const lib = {};
+  const args = Array.prototype.slice.call(arguments).concat([lib]);
 
   Object.defineProperty(lib, '$middleware', {
     enumerable: false,
@@ -21,6 +22,8 @@ module.exports = _lib => function applyParamsAndMiddleware() {
     configurable: false,
     value: fn => lib.$middleware.push(fn)
   });
+
+  Object.assign(lib, _applySpec.apply(_applySpec, args));
 
   visit(lib);
 
