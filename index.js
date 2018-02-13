@@ -1,6 +1,7 @@
 const Action = require('./lib/Action');
 const { ObjectId } = require('bson');
 const { applySpec } = require('ramda');
+const co = require('co');
 const debug = require('debug');
 const get = require('lodash.get');
 
@@ -46,40 +47,47 @@ function visit(lib, cur, curPath) {
 }
 
 function _wrap(lib, fnName) {
-  return async function wrapped() {
-    const callId = new ObjectId();
-    const originalStack = new Error().stack;
+  return function wrapped() {
     const args = arguments;
-    const startTime = Date.now();
+    return co(function*() {
+      const callId = new ObjectId();
+      const originalStack = new Error().stack;
+      const startTime = Date.now();
 
-    let actionReject;
-    let actionResolve;
-    let action = new Action({
-      callId,
-      timestamp: new Date(),
-      params: args[0],
-      fnName,
-      originalStack,
-      // "cold" promise, we'll kick it off after middleware with the
-      // promise returned from the original function.
-      promise: new Promise((resolve, reject) => {
-        actionReject = reject
-        actionResolve = resolve
-      })
-    });
+      let actionReject;
+      let actionResolve;
+      let action = new Action({
+        callId,
+        timestamp: new Date(),
+        params: args[0],
+        fnName,
+        originalStack,
+        // "cold" promise, we'll kick it off after middleware with the
+        // promise returned from the original function.
+        promise: new Promise((resolve, reject) => {
+          actionReject = reject
+          actionResolve = resolve
+        })
+      });
 
-    for (const middleware of lib.$middleware) {
-      try {
-        action = (await middleware(action)) || action;
-      } catch (error) {
-        actionReject(error);
-        return action.promise;
+      for (const middleware of lib.$middleware) {
+        try {
+          const res = middleware(action);
+          if (res != null && typeof res.then === 'function') {
+            action = (yield res) || action;
+          } else {
+            action = res || action;
+          }
+        } catch (error) {
+          actionReject(error);
+          return action.promise;
+        }
       }
-    }
 
-    let res = get(lib, action.fnName).$original.call(null, args[0]);
+      let res = get(lib, action.fnName).$original.call(null, args[0]);
 
-    actionResolve(res);
-    return action.promise;
+      actionResolve(res);
+      return action.promise;
+    });
   };
 }
