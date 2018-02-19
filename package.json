@@ -1,7 +1,7 @@
 {
   "name": "tao-js",
   "description": "Aspect-oriented middleware for async/await and JS",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Valeri Karpov <val@karpov.io>",
   "dependencies": {
     "bson": "1.0.4",
