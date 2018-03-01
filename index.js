@@ -1,5 +1,4 @@
 const Action = require('./lib/Action');
-const { ObjectId } = require('bson');
 const { applySpec } = require('ramda');
 const co = require('co');
 const debug = require('debug');
@@ -53,14 +52,12 @@ function _wrap(lib, fnName) {
   return function wrapped() {
     const args = arguments;
     return co(function*() {
-      const callId = new ObjectId();
       const originalStack = new Error().stack;
       const startTime = Date.now();
 
       let actionReject;
       let actionResolve;
       let action = new Action({
-        callId,
         timestamp: new Date(),
         params: args[0],
         fnName,

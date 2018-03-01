@@ -4,7 +4,6 @@
   "version": "0.1.0",
   "author": "Valeri Karpov <val@karpov.io>",
   "dependencies": {
-    "bson": "1.0.4",
     "co": "4.6.0",
     "debug": "2.6.7",
     "lodash.get": "4.4.2",
