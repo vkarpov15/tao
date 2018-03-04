@@ -60,6 +60,7 @@ function _wrap(lib, fnName) {
       let action = new Action({
         timestamp: new Date(),
         params: args[0],
+        name: fnName,
         fnName,
         originalStack,
         // "cold" promise, we'll kick it off after middleware with the
