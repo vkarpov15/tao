@@ -1,7 +1,7 @@
 {
   "name": "tao-js",
   "description": "Aspect-oriented middleware for async/await and JS",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Valeri Karpov <val@karpov.io>",
   "dependencies": {
     "co": "4.6.0",
@@ -12,9 +12,10 @@
   "devDependencies": {
     "acquit": "0.5.1",
     "acquit-ignore": "0.0.3",
-    "acquit-markdown": "0.0.5",
+    "acquit-markdown": "0.0.10",
     "archetype": "0.8.2",
-    "mocha": "4.1.0"
+    "mocha": "4.1.0",
+    "sinon": "4.4.2"
   },
   "keywords": [
     "aspect",
@@ -30,6 +31,7 @@
     "url": "git://github.com/vkarpov15/tao.git"
   },
   "scripts": {
+    "docs": "acquit-markdown -i -r acquit-ignore -p './test/example.test.js' -h './HEADER.md' > README.md",
     "test": "mocha test/*.test.js"
   }
 }

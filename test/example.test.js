@@ -3,7 +3,7 @@ const co = require('co');
 const sinon = require('sinon');
 const tao = require('../');
 
-describe('examples', function() {
+describe('Examples', function() {
   let stub;
 
   beforeEach(function() {
