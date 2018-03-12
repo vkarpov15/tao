@@ -29,3 +29,38 @@ Functional, aspect-oriented middleware for browser-side JavaScript and Node.js
     });
   
 ```
+
+## Integrates with Express
+
+acquit:ignore:end
+
+```javascript
+
+    return co(function*() {
+      const app = express();
+
+      const lib = tao({
+        hello: () => req => {
+          return Promise.resolve(req.query.val || 'Hello');
+        }
+      })();
+
+      lib.wrap((lib, name) => {
+        const fn = get(lib, name);
+        return (req, res) => {
+          fn(req).
+            then(val => res.send(val)).
+            catch(err => res.status(500).send(err.message));
+        };
+      });
+
+      app.get('*', lib.hello);
+
+      const server = app.listen(3000);
+
+      const { text } = yield superagent.get('http://localhost:3000/?val=hello');
+
+      assert.equal(text, 'hello');
+    });
+  
+```
