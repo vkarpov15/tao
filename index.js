@@ -21,15 +21,24 @@ module.exports = _lib => function applyParamsAndMiddleware() {
     configurable: false,
     value: fn => lib.$middleware.push(fn)
   });
+  Object.defineProperty(lib, 'wrap', {
+    enumerable: false,
+    writable: false,
+    configurable: false,
+    value: fn => {
+      visit(lib, fn);
+      return lib;
+    }
+  });
 
   Object.assign(lib, _applySpec.apply(_applySpec, args));
 
-  visit(lib);
+  visit(lib, _wrap);
 
   return lib;
 }
 
-function visit(lib, cur, curPath) {
+function visit(lib, wrap, cur, curPath) {
   cur = cur || lib;
   curPath = curPath || [];
 
@@ -40,15 +49,15 @@ function visit(lib, cur, curPath) {
   for (let path of Object.keys(cur)) {
     if (typeof cur[path] === 'function') {
       const $original = cur[path];
-      cur[path] = _wrap(lib, curPath.concat([path]).join('.'));
-      cur[path].$original = $original;
+      cur[path] = wrap(lib, curPath.concat([path]).join('.'));
       continue;
     }
-    visit(lib, cur[path], curPath.concat([path]));
+    visit(lib, wrap, cur[path], curPath.concat([path]));
   }
 }
 
 function _wrap(lib, fnName) {
+  const _fn = get(lib, fnName);
   return function wrapped() {
     const args = arguments;
     return co(function*() {
@@ -66,8 +75,8 @@ function _wrap(lib, fnName) {
         // "cold" promise, we'll kick it off after middleware with the
         // promise returned from the original function.
         promise: new Promise((resolve, reject) => {
-          actionReject = reject
-          actionResolve = resolve
+          actionReject = reject;
+          actionResolve = resolve;
         })
       });
 
@@ -85,7 +94,7 @@ function _wrap(lib, fnName) {
         }
       }
 
-      let res = get(lib, action.fnName).$original.call(null, args[0]);
+      let res = _fn.call(null, args[0]);
 
       actionResolve(res);
       return action.promise;
