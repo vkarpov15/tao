@@ -1,6 +1,9 @@
 const assert = require('assert');
 const co = require('co');
+const express = require('express');
+const get = require('lodash.get');
 const sinon = require('sinon');
+const superagent = require('superagent');
 const tao = require('../');
 
 describe('Examples', function() {
@@ -11,7 +14,7 @@ describe('Examples', function() {
   });
 
   afterEach(function() {
-    console.log && console.log.restore();
+    console.log.restore && console.log.restore();
   });
 
   it('Provides Middleware for Arbitrary Function Libraries', function() {
@@ -40,4 +43,40 @@ describe('Examples', function() {
       // acquit:ignore:end
     });
   });
+
+  it('Integrates with Express', function() {
+    return co(function*() {
+      // acquit:ignore:start
+      console.log.restore();
+      // acquit:ignore:end
+      const app = express();
+
+      const lib = tao({
+        hello: () => req => {
+          return Promise.resolve(req.query.val || 'Hello');
+        }
+      })();
+
+      lib.wrap((lib, name) => {
+        const fn = get(lib, name);
+        return (req, res) => {
+          fn(req).
+            then(val => res.send(val)).
+            catch(err => res.status(500).send(err.message));
+        };
+      });
+
+      app.get('*', lib.hello);
+
+      const server = app.listen(3000);
+
+      const { text } = yield superagent.get('http://localhost:3000/?val=hello');
+
+      assert.equal(text, 'hello');
+
+      // acquit:ignore:start
+      server.close();
+      // acquit:ignore:end
+    });
+  })
 });
