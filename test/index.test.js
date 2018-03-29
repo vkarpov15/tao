@@ -15,7 +15,7 @@ describe('tao', function() {
 
       // Always use `plusOne`
       lib.use(action => Object.assign(action, { fnName: 'plusOne' }));
-      assert.equal(yield lib.stub(41), 42);
+      assert.equal(yield lib.stub(41), 41);
       assert.equal(yield lib.plusOne(41), 42);
     });
   });
