@@ -14,6 +14,7 @@
     "acquit-ignore": "0.0.3",
     "acquit-markdown": "0.0.10",
     "archetype": "0.8.2",
+    "dox": "0.9.0",
     "express": "4.16.2",
     "mocha": "4.1.0",
     "sinon": "4.4.2",
