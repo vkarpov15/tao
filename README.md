@@ -9,6 +9,14 @@ Functional, aspect-oriented middleware for browser-side JavaScript and Node.js
 
 ## Provides Middleware for Arbitrary Function Libraries
 
+
+Tao is a framework for aspect-oriented programming that is meant to run
+anywhere: client or server, React or Express, wherever you need
+cross-cutting business logic. One mechanism Tao provides for aspect
+oriented programming is middleware, or functions that run every time
+you call a function in your Tao library.
+
+
 ```javascript
 
     return co(function*() {
@@ -34,7 +42,13 @@ Functional, aspect-oriented middleware for browser-side JavaScript and Node.js
 
 ## Integrates with Express
 
-acquit:ignore:end
+
+Tao is meant to be a meta-framework that lets you write business logic
+in a framework-agnostic way, and then use the `wrap()` function to
+glue your business logic to a particular framework. For example, you
+can write business logic and then `wrap()` your functions into
+Express route handlers.
+
 
 ```javascript
 
@@ -42,15 +56,15 @@ acquit:ignore:end
       const app = express();
 
       const lib = tao({
-        hello: () => req => {
-          return Promise.resolve(req.query.val || 'Hello');
+        hello: () => params => {
+          return Promise.resolve(params.val || 'Hello');
         }
       })();
 
       lib.wrap((lib, name) => {
         const fn = get(lib, name);
         return (req, res) => {
-          fn(req).
+          fn(Object.assign({}, req.query, req.params)).
             then(val => res.send(val)).
             catch(err => res.status(500).send(err.message));
         };
