@@ -2,7 +2,8 @@ const dox = require('dox');
 const fs = require('fs');
 
 const files = [
-  'lib/Action.js'
+  'lib/Action.js',
+  'lib/Library.js'
 ];
 
 let md = '';

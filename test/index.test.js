@@ -31,6 +31,21 @@ describe('tao', function() {
     });
   });
 
+  it('params', function() {
+    return co(function*() {
+      const lib = tao({
+        stub: () => param => Promise.resolve(param)
+      })();
+
+      const params = [];
+      lib.use(action => params.push(action.params));
+
+      yield lib.stub({ key: 'value' });
+
+      assert.deepEqual(params, [{ key: 'value' }]);
+    });
+  });
+
   it('calling other functions', function() {
     return co(function*() {
       const lib = tao({
