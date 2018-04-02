@@ -1,3 +1,4 @@
+const Action = require('../lib/Action');
 const assert = require('assert');
 const co = require('co');
 const tao = require('../');
@@ -62,8 +63,8 @@ describe('tao', function() {
 
       assert.equal(actions.length, 2);
       assert.deepEqual(actions.map(a => a.fnName), ['math.plusOne', 'test.stub']);
-      assert.ok(actions[0] instanceof require('../lib/Action'));
-      assert.ok(actions[1] instanceof require('../lib/Action'));
+      assert.ok(actions[0] instanceof Action);
+      assert.ok(actions[1] instanceof Action);
     });
   });
 });
