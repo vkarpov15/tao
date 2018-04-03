@@ -6,6 +6,10 @@ An action is an object representation of a function call. It contains
 properties like the `name` of the function that was called, the first
 argument to the function `params`, and a `promise`.
 
+## Action.prototype.timestamp
+
+The time at which this function was initially called.
+
 ## Action.prototype.name
 
 The name of the function being called. Currently, this cannot be changed.
@@ -34,6 +38,10 @@ lib.use(action => { action.params = 'Hello'; });
 
 const res = await lib.stub(42); // `res` will be 'Hello'
 ```
+
+## Action.prototype.originalStack
+
+The stack trace `new Error().stack` when the function was called
 
 ## Action.prototype.promise
 
