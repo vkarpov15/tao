@@ -82,4 +82,12 @@ describe('tao', function() {
       assert.ok(actions[1] instanceof Action);
     });
   });
+
+  it('throws if path is not object or function', function() {
+    return co(function*() {
+      assert.throws(function() {
+        tao({ num: 5 })();
+      }, /Expected object/);
+    });
+  });
 });
