@@ -71,7 +71,7 @@ describe('tao', function() {
       const actions = [];
       lib.use(action => {
         actions.push(action);
-      })
+      });
 
       assert.equal(yield lib.math.plusOne(41), 42);
       assert.equal(yield lib.test.stub(42), 42);
@@ -88,6 +88,48 @@ describe('tao', function() {
       assert.throws(function() {
         tao({ num: 5 })();
       }, /Expected object/);
+    });
+  });
+
+  it('handles middleware that returns a promise', function() {
+    return co(function*() {
+      const lib = tao({
+        stub: () => param => Promise.resolve(param),
+        plusOne: () => param => Promise.resolve(param + 1)
+      })();
+
+      lib.use(co.wrap(function*(action) {
+        yield cb => setTimeout(() => cb(), 100);
+        action.params = 42;
+      }));
+
+      assert.equal(yield lib.stub('answer'), 42);
+    });
+  });
+
+  it('middleware errors throw', function() {
+    return co(function*() {
+      let called = false;
+      const lib = tao({
+        stub: () => param => {
+          called = true;
+          return Promise.resolve(param)
+        }
+      })();
+
+      lib.use(() => {
+        throw new Error('Woops');
+      });
+
+      let threw = false;
+      try {
+        yield lib.stub();
+      } catch (err) {
+        threw = true;
+        assert.equal(err.message, 'Woops');
+      }
+
+      assert.ok(threw);
     });
   });
 });
