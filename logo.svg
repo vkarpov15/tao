@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="-40 -40 80 80">
+  <!-- Base circle -->
+  <circle r="38" fill="#000"/>
+
+  <!-- White arc -->
+	<path d="
+    M0,38
+    a38,38 0 0 0 0,-76
+    a19,19 0 0 0 0,38
+    a19,19 0 0 1 0,38
+  " fill="#fff"/>
+
+  <!-- Lower gear -->
+  <circle cy="19" r="7" fill="#555"/>
+  <line x1="0" y1="19" x2="9" y2="19" style="stroke:rgb(85,85,85);stroke-width:1.8" />
+  <line x1="0" y1="19" x2="0" y2="28" style="stroke:rgb(85,85,85);stroke-width:1.8" />
+  <line x1="0" y1="19" x2="-9" y2="19" style="stroke:rgb(85,85,85);stroke-width:1.8" />
+  <line x1="0" y1="19" x2="0" y2="10" style="stroke:rgb(85,85,85);stroke-width:1.8" />
+  <line x1="0" y1="19" x2="7.794228" y2="23.5" style="stroke:rgb(85,85,85);stroke-width:1.8" />
+  <line x1="0" y1="19" x2="4.5" y2="26.794228" style="stroke:rgb(85,85,85);stroke-width:1.8" />
+  <line x1="0" y1="19" x2="-4.5" y2="26.794228" style="stroke:rgb(85,85,85);stroke-width:1.8" />
+  <line x1="0" y1="19" x2="-7.794228" y2="23.5" style="stroke:rgb(85,85,85);stroke-width:1.8" />
+  <line x1="0" y1="19" x2="-7.794228" y2="14.5" style="stroke:rgb(85,85,85);stroke-width:1.8" />
+  <line x1="0" y1="19" x2="-4.5" y2="11.205771" style="stroke:rgb(85,85,85);stroke-width:1.8" />
+  <line x1="0" y1="19" x2="4.5" y2="11.205771" style="stroke:rgb(85,85,85);stroke-width:1.8" />
+  <line x1="0" y1="19" x2="7.794228" y2="14.5" style="stroke:rgb(85,85,85);stroke-width:1.8" />
+  <circle cy="19" r="5.5" fill="#000"/>
+  <circle cy="19" r="5" fill="#fff"/>
+
+  <!-- Upper gear -->
+  <circle cy="-19" r="14" fill="#aaa"/>
+  <line x1="0" y1="-19" x2="0" y2="-37" style="stroke:rgb(170,170,170);stroke-width:3.6" />
+  <line x1="0" y1="-19" x2="18" y2="-19" style="stroke:rgb(170,170,170);stroke-width:3.6" />
+  <line x1="0" y1="-19" x2="-18" y2="-19" style="stroke:rgb(170,170,170);stroke-width:3.6" />
+  <line x1="0" y1="-19" x2="0" y2="-37" style="stroke:rgb(170,170,170);stroke-width:3.6" />
+  <line x1="0" y1="-19" x2="0" y2="-1" style="stroke:rgb(170,170,170);stroke-width:3.6" />
+  <line x1="0" y1="-19" x2="15.588457" y2="-10" style="stroke:rgb(170,170,170);stroke-width:3.6" />
+  <line x1="0" y1="-19" x2="9" y2="-3.411542" style="stroke:rgb(170,170,170);stroke-width:3.6" />
+  <line x1="0" y1="-19" x2="-9" y2="-3.411542" style="stroke:rgb(170,170,170);stroke-width:3.6" />
+  <line x1="0" y1="-19" x2="-15.588457" y2="-10" style="stroke:rgb(170,170,170);stroke-width:3.6" />
+  <line x1="0" y1="-19" x2="-15.588457" y2="-28" style="stroke:rgb(170,170,170);stroke-width:3.6" />
+  <line x1="0" y1="-19" x2="-9" y2="-34.588457" style="stroke:rgb(170,170,170);stroke-width:3.6" />
+  <line x1="0" y1="-19" x2="9" y2="-34.588457" style="stroke:rgb(170,170,170);stroke-width:3.6" />
+  <line x1="0" y1="-19" x2="15.588457" y2="-28" style="stroke:rgb(170,170,170);stroke-width:3.6" />
+  <circle cy="-19" r="11" fill="#fff" />
+  <circle cy="-19" r="5" fill="#000" />
+
+  <!-- Right gear -->
+  <circle cx="25" cy="0" r="6" stroke-dasharray="1.5,1" stroke="#000" stroke-width="1.5" fill="#fff" />
+  <circle cx="25" cy="0" r="3" fill="#dfdfdf" />
+  <line x1="25" y1="0" x2="29" y2="0" style="stroke:rgb(223,223,223);stroke-width:1" />
+  <line x1="25" y1="0" x2="25" y2="4" style="stroke:rgb(223,223,223);stroke-width:1" />
+  <line x1="25" y1="0" x2="21" y2="0" style="stroke:rgb(223,223,223);stroke-width:1" />
+  <line x1="25" y1="0" x2="25" y2="-4" style="stroke:rgb(223,223,223);stroke-width:1" />
+  <line x1="25" y1="0" x2="28.464101" y2="2" style="stroke:rgb(223,223,223);stroke-width:1" />
+  <line x1="25" y1="0" x2="27" y2="3.464101" style="stroke:rgb(223,223,223);stroke-width:1" />
+  <line x1="25" y1="0" x2="23" y2="3.464101" style="stroke:rgb(223,223,223);stroke-width:1" />
+  <line x1="25" y1="0" x2="21.535898" y2="2" style="stroke:rgb(223,223,223);stroke-width:1" />
+  <line x1="25" y1="0" x2="21.535898" y2="-2" style="stroke:rgb(223,223,223);stroke-width:1" />
+  <line x1="25" y1="0" x2="23" y2="-3.464101" style="stroke:rgb(223,223,223);stroke-width:1" />
+  <line x1="25" y1="0" x2="27" y2="-3.464101" style="stroke:rgb(223,223,223);stroke-width:1" />
+  <line x1="25" y1="0" x2="28.464101" y2="-2" style="stroke:rgb(223,223,223);stroke-width:1" />
+  <circle cx="25" cy="0" r="2" fill="#fff" />
+</svg>
