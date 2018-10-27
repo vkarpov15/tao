@@ -132,4 +132,23 @@ describe('tao', function() {
       assert.ok(threw);
     });
   });
+
+  it('clone', function() {
+    return co(function*() {
+      const lib = tao({
+        stub: () => param => {
+          return Promise.resolve(param)
+        }
+      })();
+
+      const fn1 = v => v;
+      lib.use(fn1);
+
+      const lib2 = lib.clone();
+
+      assert.equal(yield lib2.stub(42), 42);
+      assert.equal(lib2.$middleware.length, 1);
+      assert.equal(lib2.$middleware[0], fn1);
+    });
+  });
 });
