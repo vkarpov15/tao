@@ -67,13 +67,13 @@ describe('Examples', function() {
       // acquit:ignore:end
       const app = express();
 
-      const lib = tao({
+      let lib = tao({
         hello: () => params => {
           return Promise.resolve(params.val || 'Hello');
         }
       })();
 
-      lib.wrap((lib, name) => {
+      lib = lib.wrap((lib, name) => {
         const fn = get(lib, name);
         return (req, res) => {
           fn(Object.assign({}, req.query, req.params)).
