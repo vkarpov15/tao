@@ -10,9 +10,9 @@
     "ramda": "0.25.0"
   },
   "devDependencies": {
-    "acquit": "0.6.1",
-    "acquit-ignore": "0.0.3",
-    "acquit-markdown": "0.0.10",
+    "acquit": "1.0.0",
+    "acquit-ignore": "0.1.0",
+    "acquit-markdown": "0.1.0",
     "archetype": "0.8.2",
     "dox": "0.9.0",
     "express": "4.16.2",
