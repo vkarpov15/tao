@@ -6,12 +6,12 @@
   "dependencies": {
     "bson": "3.x",
     "co": "4.6.0",
-    "debug": "2.6.7",
+    "debug": "4.1.0",
     "lodash.get": "4.4.2",
     "ramda": "0.25.0"
   },
   "devDependencies": {
-    "acquit": "1.0.0",
+    "acquit": "1.0.2",
     "acquit-ignore": "0.1.0",
     "acquit-markdown": "0.1.0",
     "archetype": "0.8.2",
