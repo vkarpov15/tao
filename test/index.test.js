@@ -141,7 +141,8 @@ describe('tao', function() {
         }
       })({});
 
-      assert.strictEqual(lib.stub(), lib);
+      const res = yield lib.stub();
+      assert.ok(res instanceof tao.Library);
     });
   });
 
