@@ -5,7 +5,7 @@
   "author": "Valeri Karpov <val@karpov.io>",
   "dependencies": {
     "co": "4.6.0",
-    "debug": "4.1.0",
+    "debug": "4.3.1",
     "lodash.get": "4.4.2",
     "ramda": "0.25.0"
   },
